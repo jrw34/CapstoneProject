@@ -17,7 +17,7 @@ df = pd.read_csv("C:\\Users\\16185\\Desktop\\parsed_branded_food.csv", low_memor
 search_str = 'Orange Juice'
 prioritize = ['Organic']
 avoid = ['Sugar', 'Sodium Benzoate', 'High Fructose Corn Syrup']
-features = ['Pulp Free']
+features = ['No Pulp']
 
 display_perfect_matches(df, search_str, prioritize, avoid, features)
 
