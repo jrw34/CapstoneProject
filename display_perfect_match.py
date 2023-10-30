@@ -181,7 +181,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                         edge_index_zipper
                         node_generator --> this should be the input for the function
     
-    Expected input: node_generator(position_dict, brand_range_list), graph_dict
+    Expected input: *node_generator(position_dict, brand_range_list), graph_dict
     """
     brand_desc_zipped_indices = edge_index_zipper(graph_dict)
     
