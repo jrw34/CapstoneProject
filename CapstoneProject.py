@@ -12,7 +12,7 @@ from display_perfect_match import*
 
 
 #read in dataframe from parsed_branded.csv
-df = pd.read_csv("C:\Users\16185\Desktop\parsed_branded_food.csv")
+df = pd.read_csv("C:\\Users\\16185\\Desktop\\parsed_branded_food.csv")
 
 #test Orange Juice Query and Display
 search_str = 'Orange Juice'
