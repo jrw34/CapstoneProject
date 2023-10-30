@@ -32,7 +32,7 @@ new_df.loc[:, 'description'] = new_df.loc[:,'description'].apply(lambda x: str(x
 
 #export new_df to a pkl file located on desktop
 filename = "parsed_branded.pkl"
-with open(desktop + "\\" + , 'wb') as f:
+with open(desktop + "\\" + filename, 'wb') as f:
     pickle.dump(new_df, f)
 
 
