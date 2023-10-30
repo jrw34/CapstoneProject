@@ -27,5 +27,6 @@ new_df.loc[:, 'description'] = new_df.loc[:,'description'].apply(lambda x: str(x
 
 
 #export new_df to a csv file located on my desktop
-new_df.to_csv("C:\\Users\\16185\\Desktop")
+new_df.to_csv("‪C:\Users\16185\Desktop\parsed_branded.csv")
+
 
