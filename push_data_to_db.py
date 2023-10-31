@@ -10,5 +10,4 @@ with open(filepath, 'rb') as f:
     parsed_df = pickle.load(f)
     
 engine = create_engine(DB_URL)
-
-
+parsed_df.to_sql("PARSED BRANDED FOODS", engine)
