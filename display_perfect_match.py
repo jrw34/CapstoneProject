@@ -7,23 +7,14 @@ import plotly.graph_objs as go
 from collections import Counter
 
 
-def perfect_match_to_graph_dict(df, search_item, prioritize, avoid, features):
-    """Returns a dictionary from query request that can be transformed into a plotly network graph"""
+def perfect_match_to_graph_dict(df, prioritize, avoid, features):
+    """Returns a dictionary from a dataframe that can be transformed into a plotly network graph"""
     
-    searched_df = item_query(df, search_item, prioritize, avoid, features)
-    
-    perfect_matches = perfect_match(searched_df, 
-                                    prioritize, 
-                                    avoid, features).reset_index()[['brand_owner', 
-                                                                    'description',
-                                                                    'ingred_list', 
-                                                                    'serving_size']]
-
-    matched_brands = perfect_matches.brand_owner.unique()
+    matched_brands = df.brand_owner.unique()
     my_graph_dict = {brand : {} for brand in matched_brands}
 
     for brand in matched_brands:
-        single_brand_group = pd.DataFrame(perfect_matches.groupby('brand_owner').get_group(brand))
+        single_brand_group = pd.DataFrame(df.groupby('brand_owner').get_group(brand))
         for idx, row in single_brand_group.iterrows():
             if row[0] in my_graph_dict:
                 my_graph_dict[row[0]][row[1]] = row[2]
@@ -319,18 +310,17 @@ def display_perfect_matches(df, search_item, prioritize, avoid, features):
     """Returns a plotly network digraph for a specified query on the dataframe"""
     """
     Required Input:
-                    df: A cleaned dataframe containing columns 'ingredients', 'description', 'brand_owner'
-                    search_item: A string like 'Orange Juice'
+                    df: A cleaned dataframe containing non null columns
                     prioritize: A list of ingredients/qualities you want the item to contain
                     avoid: A list of ingredients/qualities you do not want the item to contain
                     features: A list of features associated with the item description that you want like 'No pulp'
     """
     
-    search_item = search_item.upper()
+    
     prioritize = [p.upper() for p in prioritize]
     avoid = [a.upper() for a in avoid]
     features = [f.upper() for f in features]
     
-    queried_graph_dict = perfect_match_to_graph_dict(df, search_item, prioritize, avoid, features)
+    queried_graph_dict = perfect_match_to_graph_dict(df, prioritize, avoid, features)
     
     return plot_query_network(queried_graph_dict, search_item)
