@@ -33,20 +33,20 @@ def feature_counter(description, feature_list):
 
 
 #def function to filter based off of input
-def item_query(df, search_item, prioritize, avoid, features):
+def filter_query(searched_df, prioritize, avoid, features):
     
     """Takes item as input and returns number of brands + items that match the description and ranks according to input."""
     
     """
     Required inputs:
-    item = search_item
+    searched_df     --> DataFrame derived from sqlalchemy query, made from description_query file
     prioritize = [] --> List of ingredients you want to find in the item of your choice from ingredients
     avoid = []      --> List of ingredients you want to avoid from ingredients
     features = []   --> List of items to scan from description
     """
     
     #subset df to only contain instances with 'item_str' in the descriptions
-    item_df = search_df(df, search_for = search_item, col = 'description')
+    item_df = searched_df
     
     #create priority_counter column and add one for every ingredient_match found in ingred_list and priority
     #apply priority_counter in a lambda function for each ingredient
@@ -66,7 +66,7 @@ def item_query(df, search_item, prioritize, avoid, features):
 
 
 #def function to filter only perfectly matched items/brands
-def perfect_match(searched_df, priorities, avoid, features):
+def perfect_match(filter_queried_df, priorities, avoid, features):
     num_p = len(priorities)
     num_a = len(avoid)
     num_f = len(features)
