@@ -33,7 +33,7 @@ def feature_counter(description, feature_list):
 
 
 #def function to filter based off of input
-def filter_query(searched_df, prioritize, avoid, features):
+def assess_query(searched_df, prioritize, avoid, features):
     
     """Takes item as input and returns number of brands + items that match the description and ranks according to input."""
     
@@ -66,16 +66,16 @@ def filter_query(searched_df, prioritize, avoid, features):
 
 
 #def function to filter only perfectly matched items/brands
-def perfect_match(filter_queried_df, priorities, avoid, features):
+def perfect_match(assessed_df, priorities, avoid, features):
     num_p = len(priorities)
     num_a = len(avoid)
     num_f = len(features)
     
-    matched_df = searched_df[(searched_df['priority_count'] == num_p) 
+    matched_df = assessed_df[(assessed_df['priority_count'] == num_p) 
                              &
-                            (searched_df['feature_count'] == num_f)
+                            (assessed_df['feature_count'] == num_f)
                              & 
-                            (searched_df['avoid_count'] == 0)]
+                            (assessed_df['avoid_count'] == 0)]
     
     return matched_df
 
