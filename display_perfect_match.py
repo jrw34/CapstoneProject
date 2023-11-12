@@ -280,7 +280,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
     fig.update_layout(plot_bgcolor='darkblue')
     
     
-    fig.show()
+    return fig
 
 
 
