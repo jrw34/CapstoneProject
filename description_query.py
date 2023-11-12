@@ -3,7 +3,7 @@ import os
 from sqlalchemy import create_engine, text
 
 
-def ingredient_query(search_str):
+def description_query_db(search_str):
     
     DB_URL = os.environ['DB_URL'].replace('postgres','postgresql')
     
