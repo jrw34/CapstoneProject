@@ -1,4 +1,4 @@
-from ingredient_query import* 
+from ingredient_request import* 
 import pandas as pd
 import numpy as np
 import re
@@ -16,8 +16,8 @@ def perfect_match_to_graph_dict(df, prioritize, avoid, features):
     for brand in matched_brands:
         single_brand_group = pd.DataFrame(df.groupby('brand_owner').get_group(brand))
         for idx, row in single_brand_group.iterrows():
-            if row[0] in my_graph_dict:
-                my_graph_dict[row[0]][row[1]] = row[2]
+            if row['brand_owner'] in my_graph_dict:
+                my_graph_dict[row['brand_owner']][row['description']] = row['ingred_list']
 
     return my_graph_dict
 
@@ -193,9 +193,8 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                           name = 'Description',
                           x=desc_x,
                           y=desc_y,
-                          mode='text',
-                          text = desc_text,
-                          textposition='bottom center',
+                          mode='markers',
+                          marker_size=12,
                           hovertemplate = desc_text,
                           textfont=dict(
                                 color="green"
@@ -206,9 +205,8 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                           name = 'Ingredients',
                           x=ingred_x,
                           y=ingred_y,
-                          mode='text',
-                          text = ingred_text,
-                          textposition='bottom center',
+                          mode='markers',
+                          marker_size=12,
                           hovertemplate = ingred_text,
                           textfont=dict(
                                 color="orange"
