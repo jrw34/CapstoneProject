@@ -32,11 +32,8 @@ assessed_query = assess_query(query_df, prioritize, avoid, features)
 #filter assessed_query so that it only contains perfect matches
 perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)
 
-#convert perfect matches to graph dict
-graph_dict = perfect_match_to_graph_dict(perfect_matches, prioritize, avoid, features)
 
-
-#plot network graph 
+#plot network graph of the perfect matches
 display_perfect_matches(perfect_matches, search_str, prioritize, avoid, features)
 
 
