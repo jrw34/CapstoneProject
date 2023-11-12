@@ -185,7 +185,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                     textposition='top center',
                     hovertemplate = brand_text,
                     textfont=dict(
-                                color="blue"
+                                color="white"
                                  )
                             )
     
@@ -195,9 +195,10 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                           y=desc_y,
                           mode='markers',
                           marker_size=12,
+                          marker_symbol = 'square',
                           hovertemplate = desc_text,
                           textfont=dict(
-                                color="green"
+                                color="white"
                                  )
                                   )
     
@@ -209,7 +210,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                           marker_size=12,
                           hovertemplate = ingred_text,
                           textfont=dict(
-                                color="orange"
+                                color="white"
                                  )
                           
                                   )
@@ -227,7 +228,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                                     xref='x',
                                     yref='y',
                                     arrowwidth=2,
-                                    arrowcolor='grey',
+                                    arrowcolor='silver',
                                     arrowsize=0.6,
                                     opacity=0.3,
                                     showarrow=True,
@@ -247,7 +248,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
                                 xref='x',
                                 yref='y',
                                 arrowwidth=2,
-                                arrowcolor='grey',
+                                arrowcolor='silver',
                                 arrowsize=0.6,
                                 opacity=0.3,
                                 showarrow=True,
@@ -276,6 +277,7 @@ def plot_network_digraph(brand_x, brand_y, brand_text, desc_x, desc_y, desc_text
     max_x = max(ingred_x)
     fig.update_xaxes(range=[min_x-50,max_x+50],showticklabels=False, showgrid=False, zeroline=False)
     fig.update_yaxes(showticklabels=False, showgrid=False, zeroline=False)
+    fig.update_layout(plot_bgcolor='darkblue')
     
     
     fig.show()
