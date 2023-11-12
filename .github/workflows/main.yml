@@ -1,4 +1,0 @@
-steps:
-  - name: "Push Data to DB"
-  env: 
-    DB_URL:${{secrets.DB_URL}}
