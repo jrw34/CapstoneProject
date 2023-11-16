@@ -21,6 +21,12 @@ search_str = 'Orange Juice'.upper()
 query_df = description_query_db(search_str)
 
 #test Orange Juice Query and Display
+ingred_list_series = query_df.ingred_list
+cleaned_ingreds = ingred_list_series.apply(lambda x: x.strip('{').strip('}').replace('"', ''))
+
+print(cleaned_ingreds.iloc[:7])
+print(set([i for x in cleaned_ingreds for i in x.split(',')]))
+
 
 prioritize = ['Organic'.upper()]
 avoid = ['Sodium Benzoate'.upper(), 'HIGH FRUCTOSE CORN SYRUP']
