@@ -16,18 +16,35 @@ from description_query import*
 def app():
     st.title("Find the food products that you want to eat!")
 
-    search_str = 'Orange Juice'.upper()
-    query_df = description_query_db(search_str)
+    search_str = st.text_input('What Item are you looking for? Try something like Orange Juice or Whole Grain Bread')
+    query_df = description_query_db(search_str.upper())
     
-    prioritize = ['Organic'.upper()]
-    avoid = ['Sodium Benzoate'.upper(), 'HIGH FRUCTOSE CORN SYRUP']
+    preference = st.text_input('What are your preferences? Try something like Organic or Gluten Free')
+    prioritize = preference.upper()
+    
     features = ['No Pulp'.upper()]
     
-    assessed_query = assess_query(query_df, prioritize, avoid, features)
+    reformatted_ingredients = query_df.ingred_list.apply(lambda x: x.strip('{').strip('}').replace('"', ''))
+    all_ingredients = set([i for x in reformatted_ingredients for i in x.split(',') if i != ''])
     
-    perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)
     
-    st.plotly_chart(display_perfect_matches(perfect_matches, search_str, prioritize, avoid, features))
+    
+    with st.form("Preferences and Ingredients to Avoid"):
+        
+        
+        avoid = st.multiselect("What ingredients do you want to avoid? Maybe try Enriched Wheat Flour or Sodium Benzoate",
+                            all_ingredients)
+          
+        submitted = st.form_submit_button("Submit")
+        
+        if submitted:
+            
+            assessed_query = assess_query(query_df, prioritize, avoid, features)
+            perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)
+            st.plotly_chart(display_perfect_matches(perfect_matches, search_str, prioritize, avoid, features))
+    
+    
+    
 
 
 if __name__ == "__main__":
