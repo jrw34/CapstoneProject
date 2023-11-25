@@ -40,7 +40,7 @@ perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid,
 
 
 #plot network graph of the perfect matches
-display_perfect_matches(perfect_matches, search_str, prioritize, avoid, features)
+display_perfect_matches(perfect_matches, search_str, prioritize, avoid, features).show()
 
 
 
