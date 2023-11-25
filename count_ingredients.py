@@ -28,7 +28,8 @@ def get_ingredient_counts(df, max_ngram):
         #compute third quartile to filter out majority of results to display
         temp_q9 = np.percentile(np.array([i for i in counted_ngram.values()]), 90)
         
-        counted_temp = {str(k) : int(v) for k,v in counted_ngram.items() if v > temp_q9}
+        temp_len = len(counted_ngram)
+        counted_temp = {str(k) : int(v)/temp_len for k,v in counted_ngram.items() if v > temp_q9}
         
         count_container[max_ngram] = counted_temp
         
@@ -39,7 +40,9 @@ def get_ingredient_counts(df, max_ngram):
     
     q9 = np.percentile(np.array([i for i in counted_one_gram.values()]), 90)
     
-    counted_one = {str(k) : int(v) for k,v in counted_one_gram.items() if v > q9}
+    one_gram_len = len(counted_one_gram)
+    
+    counted_one = {str(k) : int(v)/one_gram_len for k,v in counted_one_gram.items() if v > q9}
     
     count_container[max_ngram] = counted_one
     
@@ -53,11 +56,24 @@ def plot_ingredient_counts(count_container):
     
     fig = go.Figure()
     
-    fig.add_trace(go.Bar(x=np.array([i for i in single_ingredient_counts.keys()]),
-                         y=np.array([c for c in single_ingredient_counts.values()]),
+    fig.add_trace(go.Bar(x= [c for c in single_ingredient_counts.values()],
+                         y= [i for i in single_ingredient_counts.keys()],
+                         orientation = 'h',
                          name='Most Common (Top 10%) Ingredients',
-                         marker_color='rgb(55, 83, 109)'
+                         marker_color='blue',
                         )
                  )
+    
+    paired_ingredient_counts = count_container[2]
+    
+    fig.add_trace(go.Bar(x = [c for c in paired_ingredient_counts.values() ],
+                         y = [i for i in paired_ingredient_counts.keys()   ],
+                         orientation = 'h',
+                         marker_color = 'green',
+                         name = 'Most Common (Top 10%) Ingredient Pairs'
+                        )
+                 )
+                         
+                         
     return fig
     
