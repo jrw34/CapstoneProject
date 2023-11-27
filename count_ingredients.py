@@ -25,11 +25,7 @@ def get_ingredient_counts(df, max_ngram):
         
         counted_ngram = Counter(temp_flat)
         
-        #compute third quartile to filter out majority of results to display
-        temp_q9 = np.percentile(np.array([i for i in counted_ngram.values()]), 90)
-        
-        temp_len = len(counted_ngram)
-        counted_temp = {str(k) : int(v)/temp_len for k,v in counted_ngram.items() if v > temp_q9}
+        counted_temp = {str(k) : int(v) for k,v in counted_ngram.items()}
         
         count_container[max_ngram] = counted_temp
         
@@ -42,7 +38,7 @@ def get_ingredient_counts(df, max_ngram):
     
     one_gram_len = len(counted_one_gram)
     
-    counted_one = {str(k) : int(v)/one_gram_len for k,v in counted_one_gram.items() if v > q9}
+    counted_one = {str(k) : int(v) for k,v in counted_one_gram.items() if v > q9}
     
     count_container[max_ngram] = counted_one
     
@@ -65,12 +61,15 @@ def plot_ingredient_counts(count_container):
                  )
     
     paired_ingredient_counts = count_container[2]
+    top_25 = paired_ingredient_counts.most_common(25)
+    top_25_counts = { str(k) : int(v) for k,v in paired_ingredient_counts.items() if k in top_25 }  
     
-    fig.add_trace(go.Bar(x = [c for c in paired_ingredient_counts.values() ],
-                         y = [i for i in paired_ingredient_counts.keys()   ],
+    
+    fig.add_trace(go.Bar(x = [c for c in top_25_counts.values() ],
+                         y = [i for i in top_25_counts.keys()   ],
                          orientation = 'h',
                          marker_color = 'green',
-                         name = 'Most Common (Top 10%) Ingredient Pairs'
+                         name = '25 Most Common Ingredient Pairs'
                         )
                  )
                          
