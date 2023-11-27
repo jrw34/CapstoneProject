@@ -25,7 +25,7 @@ def get_ingredient_counts(df, max_ngram):
         
         counted_ngram = Counter(temp_flat)
         
-        top_25 = paired_ingredient_counts.most_common(25)
+        top_25 = counted_ngram.most_common(25)
         top_25_counts = { str(k) : int(v) for k,v in counted_ngram.items() if k in top_25 }  
         
         count_container[max_ngram] = top_25_counts
