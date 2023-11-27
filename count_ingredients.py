@@ -61,13 +61,11 @@ def plot_ingredient_counts(count_container):
                         )
                  )
     
-    paired_ingredient_counts = count_container[2]
-    top_25 = paired_ingredient_counts.most_common(25)
-    top_25_counts = { str(k) : int(v) for k,v in paired_ingredient_counts.items() if k in top_25 }  
+    paired_ingredient_counts = count_container[2] 
     
     
-    fig.add_trace(go.Bar(x = [c for c in top_25_counts.values() ],
-                         y = [i for i in top_25_counts.keys()   ],
+    fig.add_trace(go.Bar(x = [c for c in paired_ingredient_counts.values() ],
+                         y = [i for i in paired_ingredient_counts.keys()   ],
                          orientation = 'h',
                          marker_color = 'green',
                          name = '25 Most Common Ingredient Pairs'
