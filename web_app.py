@@ -40,14 +40,16 @@ def app():
     #plot these in an interactive plotly bar chart that has each color the n-grams associated with it
     st.plotly_chart(plot_ingredient_counts(ingredient_counts))
     
+    
     #input form to ensure all input gets registered simultaneously
     with st.form("Preferences, Description, and Ingredients to Avoid"):
-        
+            
         preference = st.text_input('What are your preferences? Try something like Organic or Gluten Free')
         prioritize = [preference.upper()]
 
+        st.header('If you do not have preferences, simply leave the description blank')
         #add default of None and ensure network graph funcitonality persists
-        description = st.text_input('Specifiy as descriptive quality of the item you want. For orange juice this may be something like No Pulp or Pulp Free')
+        description = st.text_input('Specifiy a descriptive quality of the item you want. For orange juice this may be something like No Pulp or Pulp Free')
         features = [description.upper()]
         
         
@@ -59,6 +61,7 @@ def app():
         
         if submitted:
         
+            st.header("If the graph is very congested, try adding more items to the 'avoid' selection, or use the 'zoom' botton on the ")
             assessed_query = assess_query(query_df, prioritize, avoid, features)
             
             perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)

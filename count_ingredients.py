@@ -21,12 +21,13 @@ def get_ingredient_counts(df, max_ngram):
         temp_n_gram = cleaned_ingredients.apply(lambda x: list(combinations(x.split(','), max_ngram))
                                                                if len(x.split(',')) > max_ngram and ',' in x and len(x) > 1 else x)
         
-        temp_flat = [i for t in temp_n_gram for i in t]
+        temp_flat = [i for t in temp_n_gram for i in t if len(i) > 3]
         
         counted_ngram = Counter(temp_flat)
         
         top_25 = counted_ngram.most_common(25)
-        top_25_counts = { str(k) : int(v) for k,v in counted_ngram.items() if k in top_25 }  
+        
+        top_25_counts = { str(k[0]) : int(k[1]) for k in top_25 }  
         
         count_container[max_ngram] = top_25_counts
         
@@ -63,7 +64,6 @@ def plot_ingredient_counts(count_container):
     
     paired_ingredient_counts = count_container[2] 
     
-    
     fig.add_trace(go.Bar(x = [c for c in paired_ingredient_counts.values() ],
                          y = [i for i in paired_ingredient_counts.keys()   ],
                          orientation = 'h',
@@ -71,7 +71,9 @@ def plot_ingredient_counts(count_container):
                          name = '25 Most Common Ingredient Pairs'
                         )
                  )
-                         
+                 
+        
+    fig.update_layout(title = "Most Common Ingredients")
                          
     return fig
     
