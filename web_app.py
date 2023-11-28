@@ -47,7 +47,7 @@ def app():
         preference = st.text_input('What are your preferences? Try something like Organic or Gluten Free')
         prioritize = [preference.upper()]
 
-        st.header('If you do not have preferences, simply leave the description blank')
+        st.subheader('If you do not have preferences, simply leave the description blank')
         #add default of None and ensure network graph funcitonality persists
         description = st.text_input('Specifiy a descriptive quality of the item you want. For orange juice this may be something like No Pulp or Pulp Free')
         features = [description.upper()]
@@ -61,7 +61,7 @@ def app():
         
         if submitted:
         
-            st.header("If the graph is very congested, try adding more items to the 'avoid' selection, or use the 'zoom' botton on the graph display")
+            st.subheader("If the graph is very congested, try adding more items to the 'avoid' selection, or use the 'zoom' botton on the graph display")
             assessed_query = assess_query(query_df, prioritize, avoid, features)
             
             perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)
