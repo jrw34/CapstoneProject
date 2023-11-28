@@ -61,7 +61,7 @@ def app():
         
         if submitted:
         
-            st.header("If the graph is very congested, try adding more items to the 'avoid' selection, or use the 'zoom' botton on the ")
+            st.header("If the graph is very congested, try adding more items to the 'avoid' selection, or use the 'zoom' botton on the graph display")
             assessed_query = assess_query(query_df, prioritize, avoid, features)
             
             perfect_matches = perfect_match_from_assessed(assessed_query, prioritize, avoid, features)
